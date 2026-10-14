@@ -95,9 +95,15 @@ Put the switcher in a single shared component so both sub-shapes can reuse it. L
 
 Surface the URL (and the `?variant=` keys). The user will flip through whenever they get to it. The interesting feedback is usually **"I want the header from B with the sidebar from C"**, which is the actual design they want.
 
-### 6. Capture the answer and clean up
+### 6. Offer a tunable version
 
-Once a variant has won, capture the answer (which variant and why), then capture the prototype the way the [SKILL](SKILL.md) describes. Fold the winner into the real code and move the rest onto the throwaway branch, not into main:
+Once the user has picked a winner (merge the parts first when they pick "the header from B with the sidebar from C"), ask every time: **"Want a tunable version?"** On a yes, follow [TUNE.md](TUNE.md) to put a knob panel over the winner. On a no, go straight to capture.
+
+Done when the user has answered, and on a yes, when their last pasted tuning is folded into the winner.
+
+### 7. Capture the answer and clean up
+
+Once a variant has won, capture the answer (which variant and why, plus the final tuned values if it was tuned), then capture the prototype the way the [SKILL](SKILL.md) describes. Fold the winner into the real code and move the rest onto the throwaway branch, not into main:
 
 - **Sub-shape A**: fold the winner into the existing page; drop the losing variants and the switcher from main.
 - **Sub-shape B**: promote the winning variant to a real route; drop the throwaway route and the switcher from main.

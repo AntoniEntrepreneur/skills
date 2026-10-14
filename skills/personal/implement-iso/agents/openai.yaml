@@ -1,0 +1,5 @@
+interface:
+  display_name: "Implement (isolated)"
+  short_description: "Implement in an isolated worktree, then open a PR"
+policy:
+  allow_implicit_invocation: false
