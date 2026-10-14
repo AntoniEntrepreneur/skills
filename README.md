@@ -1,3 +1,54 @@
+# My skills pack
+
+My fork of [mattpocock/skills](https://github.com/mattpocock/skills): Matt's skills, my edits to some of them, and my own skills in [`skills/personal/`](./skills/personal/README.md). Used with Claude Code only.
+
+## Install skills
+
+See what the pack offers:
+
+```bash
+npx skills add AntoniEntrepreneur/skills -l
+```
+
+Install into a project (run from the project's root folder) by naming the skills you want:
+
+```bash
+npx skills add AntoniEntrepreneur/skills -a claude-code -s grilling prototype tdd
+```
+
+Add `-g` to install for every project instead (`~/.claude/skills/`). A project install lands in `.claude/skills/`, and `skills-lock.json` records where each skill came from. Remove one with `npx skills remove <skill>` (plus `-g` for a global one).
+
+## Change a skill
+
+An installed skill is a copy, and updating overwrites it, so change it here, not in a project:
+
+1. In `~/Code/skills`, make a branch and edit the skill's `SKILL.md`.
+2. Open a PR into this fork and merge it.
+3. Pull the change into each place that uses it: `npx skills update -p -y` in a project (on a branch, through a PR), `npx skills update -g -y` for global skills.
+
+A new skill of my own goes in `skills/personal/<name>/SKILL.md`, with a line in `skills/personal/README.md`. Then install it like any other.
+
+## Take Matt's updates
+
+Every Monday the **Upstream sync** workflow checks Matt's repo. If he has new commits, it opens a PR called "Upstream: N new commits from mattpocock/skills".
+
+1. Read what changes in the skills I use.
+2. Merge with **Create a merge commit**. A squash makes the next sync conflict again.
+3. Run the `npx skills update` commands from step 3 above.
+
+If the PR shows conflicts (Matt and I changed the same lines), merge by hand on a branch: `git fetch upstream && git merge upstream/main`, fix the marked lines, then open a PR. Do the same if the workflow run fails, which happens when Matt changes files under `.github/workflows/`.
+
+## On a new computer
+
+```bash
+git clone https://github.com/AntoniEntrepreneur/skills ~/Code/skills
+git -C ~/Code/skills remote add upstream https://github.com/mattpocock/skills.git
+```
+
+---
+
+_Matt's original README follows._
+
 <p>
   <a href="https://www.aihero.dev/s/skills-newsletter">
     <picture>
