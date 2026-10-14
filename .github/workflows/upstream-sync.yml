@@ -1,0 +1,53 @@
+# Weekly: if mattpocock/skills has commits this fork lacks, mirror them onto
+# the `upstream-sync` branch and keep one PR open from it into main.
+# Merge that PR with "Create a merge commit", never squash: a squash hides
+# from git which upstream commits are already in, so the next sync
+# re-conflicts on them.
+# A push fails if Matt changed files under .github/workflows (GITHUB_TOKEN
+# may not write workflows); the failed-run email is the signal to merge by
+# hand: `git fetch upstream && git merge upstream/main`.
+name: Upstream sync
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror upstream main onto upstream-sync
+        id: mirror
+        run: |
+          git remote add upstream https://github.com/mattpocock/skills.git
+          git fetch upstream main
+          if git merge-base --is-ancestor upstream/main HEAD; then
+            echo "Nothing new upstream."
+            echo "new=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git push --force origin upstream/main:refs/heads/upstream-sync
+          echo "new=true" >> "$GITHUB_OUTPUT"
+          echo "count=$(git rev-list --count HEAD..upstream/main)" >> "$GITHUB_OUTPUT"
+
+      - name: Open the sync PR if none is open
+        if: steps.mirror.outputs.new == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(gh pr list --head upstream-sync --state open --json number --jq '.[0].number')" ]; then
+            echo "Sync PR already open; its branch was updated."
+            exit 0
+          fi
+          gh pr create --base main --head upstream-sync \
+            --title "Upstream: ${{ steps.mirror.outputs.count }} new commits from mattpocock/skills" \
+            --body "New commits from [mattpocock/skills](https://github.com/mattpocock/skills). Review what changes in the skills I use, then merge with **Create a merge commit** (never squash). If GitHub reports conflicts, resolve them locally: \`git fetch upstream && git merge upstream/main\` on a branch."

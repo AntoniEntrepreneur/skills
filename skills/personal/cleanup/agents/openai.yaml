@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cleanup"
+  short_description: "Delete landed branches, worktrees, stashes, labels"
+policy:
+  allow_implicit_invocation: false
