@@ -1,3 +1,5 @@
+> **Archived.** This skill was removed from the AntoniEntrepreneur/skills fork after v1.3.1. [`setup-antoni-skills`](https://github.com/AntoniEntrepreneur/skills/blob/main/skills/personal/setup-antoni-skills/SKILL.md) replaces it. The page stays up for reference.
+
 ## What it does
 
 `setup-matt-pocock-skills` answers three questions about one repo: where issues live, what the triage labels are called, and where the domain docs sit. It records the answers as markdown files under `docs/agents/`.
