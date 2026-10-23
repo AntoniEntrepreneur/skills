@@ -18,6 +18,8 @@ npx skills add AntoniEntrepreneur/skills -a claude-code -s grilling prototype td
 
 Add `-g` to install for every project instead (`~/.claude/skills/`). A project install lands in `.claude/skills/`, and `skills-lock.json` records where each skill came from. Remove one with `npx skills remove <skill>` (plus `-g` for a global one).
 
+In a new project, include `setup-antoni-skills` and run `/setup-antoni-skills` once: it writes the `docs/agents/` files the engineering skills read.
+
 ## Change a skill
 
 An installed skill is a copy, and updating overwrites it, so change it here, not in a project:
@@ -36,7 +38,7 @@ Every Monday the **Upstream sync** workflow checks Matt's repo. If he has new co
 2. Merge with **Create a merge commit**. A squash makes the next sync conflict again.
 3. Run the `npx skills update` commands from step 3 above.
 
-If the PR shows conflicts (Matt and I changed the same lines), merge by hand on a branch: `git fetch upstream && git merge upstream/main`, fix the marked lines, then open a PR. Do the same if the workflow run fails, which happens when Matt changes files under `.github/workflows/`.
+If the PR shows conflicts (Matt and I changed the same lines), merge by hand on a branch: `git fetch upstream && git merge upstream/main`, fix the marked lines, then open a PR. Do the same if the workflow run fails, which happens when Matt changes files under `.github/workflows/`. Matt's `setup-matt-pocock-skills` is deleted here, so a sync that edits it conflicts as modify/delete: keep it deleted (`git rm -r skills/engineering/setup-matt-pocock-skills`).
 
 ## On a new computer
 
@@ -271,7 +273,6 @@ Skills I use daily for code work.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.

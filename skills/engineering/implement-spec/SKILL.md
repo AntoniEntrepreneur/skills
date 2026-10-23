@@ -5,7 +5,7 @@ description: "Implement a spec's tickets in code on one integration branch, endi
 
 You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+The issue tracker should have been provided to you. If not, tell the user to run `/setup-antoni-skills`.
 
 The goal is the entire spec implemented on a single **integration branch**, with every ticket resolved the way the issue tracker closes work.
 
@@ -21,7 +21,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
 
-3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one). Step 8 writes its body and closing lines.
+3. Call `EnterWorktree` to create the integration branch in its own worktree, named `<spec number>-<slug>`. Every later step runs there, so the main checkout stays on `main`. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one). Step 8 writes its body and closing lines.
 
 4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
@@ -37,4 +37,4 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 8. If a draft PR exists, call the Skill tool with `pr` to write its body: `main` is the before, the integration branch is the after. Below the body, add a `Closes #<n>` line for each finished ticket, and for the spec only when every ticket finished, then a list of **unfinished** tickets with the reason for each. Put the body on the PR and mark it ready for review. Otherwise, resolve each finished ticket the way the issue tracker closes work, and report the integration branch and the **unfinished** tickets.
 
-9. Clean up all **implementer subagent** worktrees.
+9. Clean up all **implementer subagent** worktrees, then call `ExitWorktree` keeping the integration worktree for review fixes.

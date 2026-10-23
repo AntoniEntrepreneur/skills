@@ -94,4 +94,4 @@ Off the main flow entirely.
 
 ## Precondition
 
-**`/setup-matt-pocock-skills`**: run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
+**`/setup-antoni-skills`**: run once per repo before your first engineering flow to write the `docs/agents/` layer the other skills assume (GitHub issue tracker, labels, domain docs, documentation rules, project map, skills) and the `AGENTS.md` pointers to it. Rerun it to bring an older setup up to date.
