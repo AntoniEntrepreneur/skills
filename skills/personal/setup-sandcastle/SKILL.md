@@ -62,7 +62,21 @@ Show the user each draft before writing it.
 
 Then run `npm install`; `patch-package` reports applying the Sandcastle patch.
 
-## 6. Record the version
+## 6. Install the skills the prompts use
+
+The pack's prompts call these skills by name:
+
+| Skill | Used by |
+|---|---|
+| `pr` | `pr-prompt.md`, the PR writer |
+
+For each one, if `.claude/skills/<name>/SKILL.md` is missing, run `npx skills add AntoniEntrepreneur/skills -a claude-code -s <name>`. A copy under `.agents/skills/` doesn't count: Claude Code reads only `.claude/skills/`. Commit the skill, because the sandbox works on a checkout of the branch, so a skill that is only on disk never reaches it.
+
+When a pack prompt starts naming a new skill, add it to this table.
+
+**Done when** every skill in the table has a committed `.claude/skills/<name>/SKILL.md`.
+
+## 7. Record the version
 
 Write `.sandcastle/pack.json`:
 
@@ -72,13 +86,12 @@ Write `.sandcastle/pack.json`:
 
 Include every path in the manifest's `files`.
 
-## 7. Things only the user can do (install only)
+## 8. Things only the user can do (install only)
 
 - `.sandcastle/.env` (gitignored by the pack's `.sandcastle/.gitignore`) needs `CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`) and `GH_TOKEN`. The user pastes them in; never read the file back.
-- The PR writer uses the `pr` skill: `npx skills add AntoniEntrepreneur/skills -a claude-code -s pr`.
 - The `sandcastle` label admits an issue: `gh label create sandcastle` if `gh label list --search sandcastle` shows none.
 
-## 8. Verify
+## 9. Verify
 
 1. `node --test .sandcastle/lib/` passes.
 2. `SANDCASTLE_DRY_RUN=1 npm run sandcastle` plans without error. It reports the sandbox image as missing until the first real run builds it.
