@@ -16,7 +16,7 @@ Install into a project (run from the project's root folder) by naming the skills
 npx skills add AntoniEntrepreneur/skills -a claude-code antigravity-cli -s grilling prototype tdd
 ```
 
-Add `-g` to install for every project instead (`~/.claude/skills/`, and `~/.gemini/antigravity-cli/skills/` for `agy`). A project install puts each skill in `.agents/skills/`, where `agy` reads it, and symlinks it into `.claude/skills/` for Claude Code; and `skills-lock.json` records where each skill came from. Remove one with `npx skills remove <skill>` (plus `-g` for a global one).
+Add `-g` to install for every project instead (`~/.claude/skills/`, and `~/.gemini/antigravity-cli/skills/` for `agy`). A project install puts each skill in `.agents/skills/`, where `agy` reads it, and symlinks it into `.claude/skills/` for Claude Code. `skills-lock.json` records where each skill came from. Remove one with `npx skills remove <skill>` (plus `-g` for a global one).
 
 In a new project, include `setup-antoni-skills` and run `/setup-antoni-skills` once: it writes the `docs/agents/` files the engineering skills read.
 
