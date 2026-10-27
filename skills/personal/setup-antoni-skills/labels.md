@@ -13,7 +13,7 @@ The skills speak in terms of canonical triage roles; this table maps those roles
 
 When a skill mentions a role (e.g. "apply the AFK-ready triage label"), use the corresponding label string from this table.
 
-`ready-for-agent` is a claim that an agent can finish the ticket alone. Withhold it whenever the ticket still contains a decision — an unpicked option, a threshold nobody has chosen, a trade-off with no stated winner — and apply `grilling` instead, so the ticket is routed to the conversation that settles it rather than to an agent who would settle it by guessing. A ticket carries one or the other, never both. `grilling` comes off and `ready-for-agent` goes on once the decisions are written into the body.
+`ready-for-agent` is a claim that an agent can finish the ticket alone. Withhold it whenever the ticket still contains a decision — an unpicked option, a threshold nobody has chosen, a trade-off with no stated winner — and apply `grilling` instead, so the ticket is routed to the conversation that settles it rather than to an agent who would settle it by guessing. A ticket carries one or the other, never both. `grilling` comes off once the decisions are written into the body, and `ready-for-agent` goes on, or `spec` alone when the body became a spec.
 
 ## Descriptive labels
 
@@ -24,7 +24,7 @@ Orthogonal to triage — they say what an issue *is*, not what state it is in. A
 | `bug`         | Something shipped behaves wrongly                                   |
 | `enhancement` | A change to behaviour that already works                            |
 | `documentation` | Docs-only work                                                    |
-| `spec`        | A specification issue, typically the parent of a `to-tickets` batch (don't apply the ready-for-agent label too unless asked to) |
+| `spec`        | A specification issue, typically the parent of a `to-tickets` batch. Carries `spec` alone unless the user names another label |
 | `research`    | Answered by reading sources, not by changing code                   |
 | `grilling`    | Answered by a conversation that settles a decision (use the `grill-with-docs` skill) |
 | `future idea` | Worth doing, nobody is doing it, no commitment to when              |
