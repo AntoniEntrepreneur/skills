@@ -44,10 +44,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ -n "$(gh pr list --head upstream-sync --state open --json number --jq '.[0].number')" ]; then
+          if [ -n "$(gh pr list -R "$GITHUB_REPOSITORY" --head upstream-sync --state open --json number --jq '.[0].number')" ]; then
             echo "Sync PR already open; its branch was updated."
             exit 0
           fi
-          gh pr create --base main --head upstream-sync \
+          gh pr create -R "$GITHUB_REPOSITORY" --base main --head upstream-sync \
             --title "Upstream: ${{ steps.mirror.outputs.count }} new commits from mattpocock/skills" \
             --body "New commits from [mattpocock/skills](https://github.com/mattpocock/skills). Review what changes in the skills I use, then merge with **Create a merge commit** (never squash). If GitHub reports conflicts, resolve them locally: \`git fetch upstream && git merge upstream/main\` on a branch."
