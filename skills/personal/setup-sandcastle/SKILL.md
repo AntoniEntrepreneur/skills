@@ -69,8 +69,9 @@ The pack's prompts call these skills by name:
 | Skill | Used by |
 |---|---|
 | `pr` | `pr-prompt.md`, the PR writer |
+| `tdd` | `implement-prompt.md`, the implementer (Claude or `agy`) |
 
-For each one, if `.claude/skills/<name>/SKILL.md` is missing, run `npx skills add AntoniEntrepreneur/skills -a claude-code -s <name>`. A copy under `.agents/skills/` doesn't count: Claude Code reads only `.claude/skills/`. Commit the skill, because the sandbox works on a checkout of the branch, so a skill that is only on disk never reaches it.
+For each one, if `.claude/skills/<name>/SKILL.md` is missing, run `npx skills add AntoniEntrepreneur/skills -a claude-code antigravity-cli -s <name>`. It puts the skill in `.agents/skills/<name>/`, where the `agy` implementer reads it, and symlinks `.claude/skills/<name>` to it for Claude. Commit both, because the sandbox works on a checkout of the branch, so a skill that is only on disk never reaches it.
 
 When a pack prompt starts naming a new skill, add it to this table.
 
