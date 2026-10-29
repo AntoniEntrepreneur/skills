@@ -28,6 +28,7 @@ Take the first row that fits:
 | Checked out in a locked or dirty worktree | **in use** | `git worktree list`, `git -C <path> status --porcelain` |
 | `sandcastle/*` with a session in `.sandcastle/cache/run-state.json`, or an open batch PR | **in use** | Sandcastle resumes it on its next run |
 | `prototype/*` | **prototype** | step 5 |
+| `sandcastle/*` listed by `SANDCASTLE_DRY_RUN=1 npm run sandcastle -- prune` | **landed** | its commits are on `origin/main` or in a merged batch PR |
 | Its PR is merged, with no commits after the merge | **landed** | `gh pr list --head <branch> --state merged` |
 | `sandcastle/issue-*` whose issue was closed by a merged PR | **landed** | `gh issue view <n> --json closedByPullRequestsReferences` |
 | No PR, and its diff is already on `origin/main` | **landed** | diff check below |
@@ -111,6 +112,8 @@ Local branches are the user's to delete: squash-merged branches need `git branch
 ```
 ! git branch -D <branch> <branch> …
 ```
+
+When the user approved every branch the prune dry-run listed, those branches go in the paste line as one `npm run sandcastle -- prune`, which deletes exactly that list.
 
 Report:
 
