@@ -1,0 +1,16 @@
+{
+  "title": "Review Page Test",
+  "intro": "Sample rows for the note-saving test, with `code` in the intro.",
+  "lang": "pl",
+  "rows": [
+    {"group": ["Sample review", "Approve rows"], "context": [{"label": "Problem", "text": "Oblicz: 4 : ⅗"}, {"label": "Student", "text": "2⅖"}], "versions": [{"label": "Today", "text": "Dodałeś zamiast pomnożyć!"}, {"label": "New", "text": "Tu trzeba pomnożyć, a nie dodać."}], "mode": "approve", "tags": ["Same message as 2 other sentences"], "note": "Rule 13: `!` goes."},
+    {"group": ["Sample review", "Approve rows"], "versions": [{"label": "New", "text": "Placeholder row B"}]},
+    {"group": ["Sample review", "Approve rows"], "versions": [{"label": "New", "text": "Placeholder row C"}]},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "New", "text": "Placeholder row D, a < b </script>"}]},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "A", "text": "Nie odejmuj mianowników. Najpierw sprowadź ułamki do wspólnego mianownika."}, {"label": "B", "text": "Najpierw sprowadź ułamki do wspólnego mianownika."}], "mode": "choose"},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "A", "text": "Placeholder row F, version A"}, {"label": "B", "text": "Placeholder row F, version B"}, {"label": "C", "text": "Placeholder row F, version C"}], "mode": "choose"},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "A", "text": "Placeholder row H, version A"}, {"label": "B", "text": "Placeholder row H, version B"}], "mode": "choose"},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "New", "text": "Placeholder row J"}]},
+    {"group": ["Sample review", "Choice rows"], "versions": [{"label": "New", "text": "Placeholder locked row"}], "locked": true}
+  ]
+}
