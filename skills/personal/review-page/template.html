@@ -1,0 +1,130 @@
+<title>%%TITLE%%</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+<style>
+/* Layout: a marking sheet. Each row reads left to right as context, then the versions, with a red pen for flags. */
+:root {
+  --paper: #f6f8fb; --sheet: #ffffff; --ink: #18243a; --muted: #5a6880; --line: #d9e0ea; --grid: #e6ebf3;
+  --accent: #1f4fbf; --accent-soft: #e6edfb; --pen: #c22f3d; --pen-soft: #fbe9eb; --good: #16704a; --good-soft: #e2f4ec; --warn: #8a5a00; --warn-soft: #fbf0d9;
+  --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif; --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif; --mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #111724; --sheet: #182133; --ink: #e8edf6; --muted: #9aa8bf; --line: #2c3850; --grid: #1c2638;
+  --accent: #8eb0ff; --accent-soft: #22325a; --pen: #ff8a94; --pen-soft: #41212a; --good: #6fd6a8; --good-soft: #17382b; --warn: #f0c26a; --warn-soft: #3b3018; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --paper: #111724; --sheet: #182133; --ink: #e8edf6; --muted: #9aa8bf; --line: #2c3850; --grid: #1c2638;
+  --accent: #8eb0ff; --accent-soft: #22325a; --pen: #ff8a94; --pen-soft: #41212a; --good: #6fd6a8; --good-soft: #17382b; --warn: #f0c26a; --warn-soft: #3b3018; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--paper); color: var(--ink); font: 16px/1.5 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sheet); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.intro { background-color: var(--sheet); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 22px 22px; border-bottom: 1px solid var(--line); padding-block: 36px 28px; }
+h1 { font: 700 clamp(30px, 5vw, 44px)/1.08 var(--display); margin: 0 0 12px; text-wrap: balance; }
+.lede { max-width: 66ch; margin: 0; }
+.how { display: flex; flex-wrap: wrap; gap: 8px 24px; list-style: none; padding: 0; margin: 16px 0 0; color: var(--muted); font-size: 15px; }
+.how b { color: var(--ink); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--sheet); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding-block: 10px; }
+.stat { font-variant-numeric: tabular-nums; font-size: 15px; }
+.stat b { font-size: 17px; }
+.stat.pen b { color: var(--pen); }
+.save { margin-left: auto; font-size: 14px; color: var(--muted); }
+.save.err { color: var(--pen); font-weight: 700; }
+label.only { display: flex; gap: 6px; align-items: center; font-size: 14px; cursor: pointer; }
+.banner { background: var(--warn-soft); color: var(--warn); padding: 10px 14px; border-radius: 6px; margin: 16px 0 0; }
+nav.toc { padding-block: 20px 4px; display: grid; gap: 12px; }
+.nav-label { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 14px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); text-decoration: none; background: var(--sheet); }
+.chip:hover { border-color: var(--accent); }
+.chip.done { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.chip.flagged { background: var(--pen-soft); color: var(--pen); border-color: transparent; }
+h2.chapter { font: 700 28px/1.15 var(--display); margin: 36px 0 0; }
+.topic { margin-top: 20px; background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; scroll-margin-top: 70px; }
+.topic.all-done { border-color: var(--good); }
+.thead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+h3 { font: 600 20px/1.2 var(--display); margin: 0; }
+.count { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 0 20px; padding: 14px 16px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+.row:first-child { border-top: 0; }
+.row.is-flagged { background: var(--pen-soft); }
+.row.is-done { background: var(--good-soft); }
+.only-open .row.is-done, .only-open .row.is-settled, .only-open .topic.all-finished { display: none; }
+.row.no-ctx { grid-template-columns: minmax(0, 1fr); }
+.main { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px 20px; align-content: start; }
+.versions { display: contents; }
+.foot { grid-column: 1 / -1; }
+.main.approve .foot { grid-column: -2 / -1; }
+.version.earlier p { color: var(--muted); }
+.version.judged p { font-weight: 700; }
+.version .pick { margin-top: 8px; }
+.version.is-picked { outline: 2px solid var(--good); outline-offset: 4px; border-radius: 2px; }
+.foot .note { font-size: 14px; color: var(--muted); margin: 8px 0 0; }
+.row.locked { background: var(--paper); }
+.cell { min-width: 0; }
+.cell p { margin: 0; }
+.lab { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.fig { color: var(--ink); overflow-x: auto; margin-top: 6px; max-width: 100%; }
+.fig svg { max-width: 100%; height: auto; display: block; }
+dl { display: grid; gap: 4px; margin: 6px 0 0; }
+dt { color: var(--muted); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+dd { margin: 0; }
+code { font-family: var(--mono); font-size: .92em; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.tag { font-size: 12.5px; padding: 1px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); }
+.ctl { margin-top: 10px; display: grid; gap: 8px; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.notebox { display: grid; gap: 6px; justify-items: start; }
+.notefoot { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
+.notefoot .bad { color: var(--pen); font-weight: 700; }
+.savenote { background: transparent; color: var(--ink); border: 1px solid var(--line); padding: 2px 10px; font-size: 14px; }
+.pick { background: transparent; color: var(--good); border: 1px solid var(--good); padding: 2px 14px; font-size: 14px; font-weight: 700; }
+.pick[aria-pressed="true"] { background: var(--good); color: var(--sheet); }
+button { font: inherit; cursor: pointer; border-radius: 4px; }
+button:focus-visible, a:focus-visible, textarea:focus-visible, summary:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.flag { background: transparent; color: var(--pen); border: 1px solid var(--pen); padding: 2px 12px; font-size: 14px; }
+.flag[aria-pressed="true"] { background: var(--pen); color: var(--sheet); font-weight: 700; }
+textarea { width: 100%; font: 15px/1.4 var(--body); color: var(--ink); background: var(--sheet); border: 1px solid var(--pen); border-radius: 4px; padding: 6px 8px; }
+button:disabled { opacity: .5; cursor: default; }
+footer { padding-block: 32px 48px; color: var(--muted); font-size: 14px; }
+@media (max-width: 820px) {
+  .row { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .main { grid-template-columns: minmax(0, 1fr); }
+  .main.approve .foot { grid-column: 1 / -1; }
+  .save { margin-left: 0; width: 100%; }
+}
+</style>
+
+<div class="intro"><div class="wrap">
+  <h1>%%TITLE%%</h1>
+  <p class="lede">%%INTRO%%</p>
+  <ul class="how">
+    <li><b>Approve</b> or <b>pick</b> each row you accept.</li>
+    <li><b>Flag</b> any you disagree with. A note is optional and saves as you type.</li>
+    <li><b>Tell Claude</b> when you're done. Flags come back to chat.</li>
+  </ul>
+  <p class="banner" id="offline" hidden>Saving isn't available in this view, so your answers won't be kept. Open the page signed in to claude.ai to review it.</p>
+</div></div>
+
+<div class="bar"><div class="wrap">
+  <span class="stat"><b id="s-done">0</b> of %%TOTAL%% done</span>
+  <span class="stat pen"><b id="s-flag">0</b> flagged</span>
+  <span class="stat"><b id="s-left">%%TOTAL%%</b> left</span>
+  <label class="only"><input type="checkbox" id="only-open"> Hide finished rows</label>
+  <span class="save" id="save" role="status">Loading saved answers…</span>
+</div></div>
+
+<div class="wrap">
+  %%NAV%%
+  %%SECTIONS%%
+  <footer></footer>
+</div>
+
+<script type="application/json" id="rows-data">%%ROWS_DATA%%</script>
+<script>
+%%SCRIPT%%
+</script>
