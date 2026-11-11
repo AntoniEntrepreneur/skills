@@ -11,15 +11,11 @@ Work the tree in **rounds**. The **frontier** is every decision whose prerequisi
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
 
-<<<<<<< HEAD
 ## What earns a question
-=======
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent with a fresh context window to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
->>>>>>> upstream/main
 
 A branch earns a question when its options differ in something the user would care about — cost, reversibility, user-facing behaviour, scope, or a name they will live with. Every other branch you settle yourself and declare on the round's `Assumed:` line, where their veto turns it back into a question.
 
-Finding _facts_ is your job, never the user's. Read a named file yourself; dispatch a sub-agent for an open-ended lookup — every caller of a symbol, every file matching a convention — so the sweep's output stays out of the interview. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. Where a fact stays out of reach, ask anyway and mark the claim ⚠️ — the user can see exactly which line to distrust.
+Finding _facts_ is your job, never the user's. Read a named file yourself; dispatch a sub-agent with a fresh context window for an open-ended lookup — every caller of a symbol, every file matching a convention — so the sweep's output stays out of the interview. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. Where a fact stays out of reach, ask anyway and mark the claim ⚠️ — the user can see exactly which line to distrust.
 
 The _decisions_ are the user's: put each to them and wait. When an answer collides with a fact you verified, put the collision back to them once, as its own question with the fact restated; if they hold, proceed on their answer.
 
