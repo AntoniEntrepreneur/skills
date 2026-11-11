@@ -35,11 +35,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
-<<<<<<< HEAD
-7. Once the frontier is empty and every ticket is merged or **unfinished**, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**.
-=======
-7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single fresh **implementer subagent**.
->>>>>>> upstream/main
+7. Once the frontier is empty and every ticket is merged or **unfinished**, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single fresh **implementer subagent**.
 
 8. If a draft PR exists, call the Skill tool with `pr` to write its body: `main` is the before, the integration branch is the after. Below the body, add a `Closes #<n>` line for each finished ticket, and for the spec only when every ticket finished, then a list of **unfinished** tickets with the reason for each. Put the body on the PR and mark it ready for review. Otherwise, resolve each finished ticket the way the issue tracker closes work, and report the integration branch and the **unfinished** tickets.
 
