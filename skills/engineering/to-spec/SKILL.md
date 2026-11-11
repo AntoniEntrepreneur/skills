@@ -18,6 +18,8 @@ Check with the user that these seams match their expectations.
 
 3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `spec` label, and only that label unless the user names another. The spec is the parent `/to-tickets` slices into agent work, so its tickets carry the triage labels.
 
+Publish the spec as a new ticket. If the conversation began from a grilling ticket, close that ticket once the spec is published, linking the spec in the closing comment.
+
 <spec-template>
 
 ## Problem Statement
