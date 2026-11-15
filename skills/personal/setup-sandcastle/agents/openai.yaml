@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Sandcastle"
+  short_description: "Install the Sandcastle loop from…"
+policy:
+  allow_implicit_invocation: false

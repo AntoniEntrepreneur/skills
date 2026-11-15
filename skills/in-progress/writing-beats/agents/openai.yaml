@@ -1,0 +1,5 @@
+interface:
+  display_name: "Writing Beats"
+  short_description: "Writing, exploit; assemble raw material into a journey of…"
+policy:
+  allow_implicit_invocation: false

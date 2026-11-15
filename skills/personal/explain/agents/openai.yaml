@@ -1,0 +1,3 @@
+interface:
+  display_name: "Explain"
+  short_description: "Explain a programming/CS term, or narrate a whole situation…"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Software Factory"
+  short_description: "Shared language for designing a software factory: the tasks…"
+policy:
+  allow_implicit_invocation: false

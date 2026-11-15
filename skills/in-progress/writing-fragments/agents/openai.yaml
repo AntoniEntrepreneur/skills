@@ -1,0 +1,5 @@
+interface:
+  display_name: "Writing Fragments"
+  short_description: "Writing, explore: mine raw fragments, no structure yet"
+policy:
+  allow_implicit_invocation: false

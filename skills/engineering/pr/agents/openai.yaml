@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pr"
+  short_description: "Use when writing a PR body"
