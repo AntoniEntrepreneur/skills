@@ -1,0 +1,5 @@
+interface:
+  display_name: "Writing Shape"
+  short_description: "Writing, exploit: shape raw material into an article…"
+policy:
+  allow_implicit_invocation: false

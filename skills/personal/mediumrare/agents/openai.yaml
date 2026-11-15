@@ -1,0 +1,5 @@
+interface:
+  display_name: "Mediumrare"
+  short_description: "Unpack the grilling questions you're stuck on — plain…"
+policy:
+  allow_implicit_invocation: false

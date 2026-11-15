@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Ts Deep Modules"
+  short_description: "Wire dependency-cruiser into a TypeScript repo so each…"
+policy:
+  allow_implicit_invocation: false

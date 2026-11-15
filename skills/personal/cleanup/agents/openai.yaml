@@ -1,0 +1,5 @@
+interface:
+  display_name: "Cleanup"
+  short_description: "Delete branches, worktrees and stashes whose work is on…"
+policy:
+  allow_implicit_invocation: false

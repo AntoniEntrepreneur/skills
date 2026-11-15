@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup Antoni Skills"
+  short_description: "Set up a repo's agent docs (issue tracker, labels, domain…"
+policy:
+  allow_implicit_invocation: false
