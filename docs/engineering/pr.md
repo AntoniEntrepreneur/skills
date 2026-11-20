@@ -1,18 +1,18 @@
 ## What it does
 
-`pr` defines the shape of a pull request body: a **Summary** that shows the change, **Evidence** that it works, and a **Merge Danger** call on how risky it is to land. It is a format reference, not a workflow. It does not push a branch, open the PR, or decide what goes into it. It tells the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) what the body should look like when it writes one.
+`pr` defines the shape of a pull request: a title that names what the change does, then a body with a **Summary** that shows the change, **Evidence** that it works, and a **Merge Danger** call on how risky it is to land. It is a format reference, not a workflow. It does not push a branch, open the PR, or decide what goes into it. It tells the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) what the title and body should look like when it writes them.
 
 The summary is a visual, not a paragraph. A default PR body describes the diff in prose. This one picks the **smallest view** that makes the key point clear (pseudocode, a call tree, a component tree, a file tree, a Mermaid diagram, or a shaped diff) and keeps the words around it brief. The reviewer already has the diff open, so the body shows them its shape before they read it.
 
 ## When to reach for it
 
-Type `/pr`, or the agent reaches for it automatically whenever it is writing a PR body.
+Type `/pr`, or the agent reaches for it automatically whenever it is writing a PR title or body.
 
 | Your situation | Reach for |
 | --- | --- |
 | A branch is ready and needs a body a reviewer can scan | `pr` |
 | The code is written but nobody has reviewed it yet | [code-review](https://aihero.dev/skills-code-review) first, then `pr` |
-| The PR is open and review comments are coming back | Nothing in this set yet; `pr` only writes the body |
+| The PR is open and review comments are coming back | Nothing in this set yet; `pr` only writes the title and body |
 
 ## The template
 
@@ -32,7 +32,11 @@ Not blindly, and that is the point of stating it. The agent that wrote the chang
 
 **Does it open the PR for me?**
 
-No. `pr` covers only the body. [implement](https://aihero.dev/skills-implement) ends by committing to the current branch. Requests for a skill or option that opens the PR (a `/to-pr`, or `implement` opening a PR instead of committing) are still open proposals. One user's workaround is a one-sentence local override of `implement` that tells it to open a PR. [implement-spec](https://aihero.dev/skills-implement-spec) is the exception: it opens a draft PR when your issue tracker closes work through PRs or when you ask for one. Because `pr` is model-invoked, the agent uses this shape for the body whenever you ask it to open a PR.
+No. `pr` covers only the title and body. [implement](https://aihero.dev/skills-implement) ends by committing to the current branch. Requests for a skill or option that opens the PR (a `/to-pr`, or `implement` opening a PR instead of committing) are still open proposals. One user's workaround is a one-sentence local override of `implement` that tells it to open a PR. [implement-spec](https://aihero.dev/skills-implement-spec) is the exception: it opens a draft PR when your issue tracker closes work through PRs or when you ask for one. Because `pr` is model-invoked, the agent uses this shape for the body whenever you ask it to open a PR.
+
+**Why does the title leave out the issue number?**
+
+A title like `#1244: 5 issues` tells the reader where to look, not what changed, and a list of them all reads the same. The title names the outcome in one imperative line (`Return the cached result when a save is unchanged`), and the issue links live in the body, where GitHub already turns them into closing references. A PR that bundles several changes names the goal of the spec they share, or its biggest change followed by `, and N more changes`.
 
 **Won't it just produce another wall of text and diagrams?**
 
@@ -64,6 +68,7 @@ Not by itself. One user's approach is a standing instruction in the repo's agent
 
 ## It's working if
 
+- You can tell what each PR in the list does from its title alone.
 - You can tell what the PR changes from the Summary visual alone, before opening the diff.
 - The body has no preamble: it starts at the Summary heading.
 - The Evidence section shows a before and an after, not a claim that tests pass.
