@@ -5,11 +5,13 @@ argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff summary of the current conversation so a fresh agent can continue the work. Save it to the temporary directory of the user's OS, then launch a background agent seeded with it as its prompt: `claude --bg --name "<descriptive name>" -- "$(cat <summary file>)"`. Passing the file keeps the shell from running backticks or expanding `$` in the summary. It starts in the current working directory and returns immediately; the user manages it with `claude agents`.
+Write a handoff summary of the current conversation so a fresh agent can continue the work. Save it to the temporary directory of the user's OS, then launch a background agent seeded with it as its prompt: `claude --bg --name "<descriptive name>" --model <your model ID> --effort <your effort level> -- "$(cat <summary file>)"`. Passing the file keeps the shell from running backticks or expanding `$` in the summary. It starts in the current working directory and returns immediately; the user manages it with `claude agents`.
 
 Always pass `-n`/`--name` with a descriptive name (e.g. `--name "Fix login bug"`); it sets the display name shown in the job list, session picker, and terminal title.
 
-Include a "suggested skills" section in the summary, naming which skills the next agent should call the Skill tool for.
+Pass `--model` with the exact model ID your system prompt gives you (e.g. `--model claude-opus-5-5`) and `--effort` with this chat's effort level, so the agent runs on the same model and effort as this chat. When your context doesn't state your effort level, ask the user which one to pass (`low`, `medium`, `high`, `xhigh`, `max`).
+
+Include a "suggested skills" section in the summary, naming which skills the next agent should call the Skill tool for. A skill with `disable-model-invocation: true` in its frontmatter is the user's to run: name it as a step where the next agent asks the user to type `/<skill>`.
 
 Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
 
