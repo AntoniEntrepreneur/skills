@@ -1,6 +1,6 @@
 ---
 name: pr
-description: "Use when writing a PR body."
+description: "Use when writing a PR title or body."
 metadata:
   credits:
     skill: show-me
@@ -8,6 +8,19 @@ metadata:
     organisation: Humanlayer
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
+
+Use the user's domain language from `GLOSSARY.md` in both the title and the body.
+
+## Title
+
+Name the outcome: one imperative line, starting at the verb, that says what the change does, for example `Return the cached result when a save is unchanged`. The title carries the change alone; issue numbers and counts belong in the body.
+
+When the PR bundles several changes:
+
+- They all serve one parent spec: name that spec's goal.
+- Otherwise: name the biggest change and append `, and N more changes`.
+
+## Body
 
 Use this template for writing the PR body:
 
@@ -34,7 +47,7 @@ Use this template for writing the PR body:
 
 ## Sections
 
-Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
+Skip all preambles and keep prose brief.
 
 ### Summary
 
