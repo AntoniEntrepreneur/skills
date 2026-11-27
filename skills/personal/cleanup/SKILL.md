@@ -98,7 +98,7 @@ git worktree remove <path>
 git push origin --delete <branch>   # when it exists on origin
 git stash drop stash@{<n>}          # highest index first
 git worktree prune
-gh issue list --label <label> --state all --json number -q '.[].number'
+gh issue list --label <label> --state all --limit 1000 --json number -q '.[].number'
 gh label delete <label> --yes
 ```
 
